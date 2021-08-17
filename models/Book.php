@@ -9,11 +9,10 @@ class Book {
     private $pages;
 
     function __construct($id_book,$title,$image,$pages){
+        $this->id_book = $id_book;
         $this->title = $title;
         $this->image = $image;
         $this->pages = $pages;
-        // self::$books[] = $this;
-        (new BookManager)->addBook($this);
     }
 
     public function getId(){
