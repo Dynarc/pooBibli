@@ -32,7 +32,6 @@ if(empty($_GET['page'])){
                             if(!empty($url[2])){
                                 $bookController->displayBook($url[2]);
                             } else throw new Exception("Aucun livre n'est selectionné !");
-                            
                             break;
 
                         case 'ajouter':
@@ -45,11 +44,19 @@ if(empty($_GET['page'])){
                             break;
 
                         case 'modifier':
-                            echo 'modifier';
+                            if(!empty($url[2])){
+                                $bookController->modifyBook($url[2]);
+                            } else throw new Exception("Aucun livre n'est selectionné !");
+                            break;
+
+                        case 'modified':
+                            $bookController->modifyBookModified();
                             break;
 
                         case 'supprimer' :
-                            echo 'supprimer';
+                            if(!empty($url[2])){
+                                $bookController->deleteBook($url[2]);
+                            } else throw new Exception("Aucun livre n'est selectionné !");
                             break;
 
                         default:

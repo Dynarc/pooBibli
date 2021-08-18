@@ -16,19 +16,19 @@ class Book {
     }
 
     public function getId(){
-        return $this->id_book;
+        return htmlspecialchars($this->id_book);
     }
 
     public function getTitle(){
-        return $this->title;
+        return htmlspecialchars($this->title);
     }
 
     public function getImage(){
-        return $this->image;
+        return htmlspecialchars($this->image);
     }
 
     public function getPages(){
-        return $this->pages;
+        return htmlspecialchars($this->pages);
     }
 
     public function setId($id){

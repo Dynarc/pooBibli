@@ -3,7 +3,7 @@
 
 
   
-<form action="/livres/validate" method="post" enctype="multipart/form-data">
+<form action="../livres/validate" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
         <label for="exampleInputEmail1" class="form-label mt-4">Titre du livre</label>

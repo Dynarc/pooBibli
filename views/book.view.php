@@ -4,11 +4,11 @@
 
     <div class="card" style="width: 25rem;">
 
-        <img class="card-img-top" src="<?=htmlspecialchars($book->getImage());?>" alt="Couverture du livre <?=htmlspecialchars($book->getTitle());?> ">
+        <img class="card-img-top" src="<?=URL?>image/<?=$book->getImage();?>" alt="Couverture du livre <?=$book->getTitle();?> ">
         
         <div class="card-body">
-            <h5 class="card-title"><?=htmlspecialchars($book->getTitle());?></h5>
-            <p class="card-text">Ce bouquin contient <?=htmlspecialchars($book->getPages());?> pages.</p>
+            <h5 class="card-title"><?=$book->getTitle();?></h5>
+            <p class="card-text">Ce bouquin contient <?=$book->getPages();?> pages.</p>
         </div>
 
     </div>
