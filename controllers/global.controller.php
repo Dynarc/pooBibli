@@ -1,8 +1,8 @@
 <?php
 
-class GlobalController {
+abstract class GlobalController {
 
-    function addImage(){
+    static function addImage(){
         if(!empty($_FILES)){
             if ($_FILES["image"]["size"] > 1000000) {
                 throw new Exception('Fichier trop lourd'); 
@@ -22,8 +22,16 @@ class GlobalController {
         }
     }
 
-    function deleteLocalImage($img){
-        rename('image/'.$img,'imageDelete/'.$img);
+    static function deleteLocalImage($img){
+        if (self::keepImage($img)<1){
+            rename('image/'.$img,'imageDelete/'.$img);
+        }
+    }
+
+    static function keepImage($image){
+        $bookManager = new BookManager;
+        $total = $bookManager->countImage($image);
+        return $total[0]->count;
     }
 
 }

@@ -89,4 +89,14 @@ class BookManager extends Model{
             ':id'=>$id,
         ]);
     }
+
+    public function countImage($image){
+        $sql = "SELECT COUNT(*) as count FROM `livre` WHERE image = :image";
+        $req =$this->getDB()->prepare($sql);
+        $req->execute([
+            ':image'=>$image,
+        ]);
+        $total = $req->fetchAll(PDO::FETCH_OBJ);
+        return $total;
+    }
 }
