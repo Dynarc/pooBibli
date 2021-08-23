@@ -1,17 +1,19 @@
 <?php ob_start();?>
 
-<div class="container d-flex justify-content-center">
+<div class="container d-flex flex-column align-items-center">
 
     <div class="card" style="width: 25rem;">
 
-        <img class="card-img-top" src="<?=URL?>image/<?=$book->getImage();?>" alt="Couverture du livre <?=$book->getTitle();?> ">
+        <img src="<?=URL?>image/<?=$book->getImage();?>" alt="Couverture du livre <?=$book->getTitle();?> ">
         
         <div class="card-body">
             <h5 class="card-title"><?=$book->getTitle();?></h5>
-            <p class="card-text">Ce bouquin contient <?=$book->getPages();?> pages.</p>
+            <p class="card-text">Ce livre contient <?=$book->getPages();?> pages.</p>
         </div>
 
     </div>
+
+    <a href="<?=URL?>livres" class="mt-3">retour</a>
 
 </div>
 

@@ -14,9 +14,9 @@
             <input type="text" class="form-control" name="pages" value='<?=$book->getPages();?>'>
         </div>
 
-        <div class="card mt-4" style="width: 18rem;">
+        <div class="card mt-4" style="width: 19rem;">
 
-            <img class="card-img-top" src="<?=URL?>image/<?=$book->getImage();?>" alt="Couverture du livre <?=$book->getTitle();?> ">
+            <img src="<?=URL?>image/<?=$book->getImage();?>" alt="Couverture du livre <?=$book->getTitle();?> ">
 
         </div>
 

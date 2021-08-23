@@ -31,7 +31,7 @@ class BookManager extends Model{
                 return $book;
             }
         }
-        throw new Exception("Le Bouquin n'existe pas !");
+        throw new Exception("Le livre n'existe pas ");
     }
 
     public function addBookDB($nom,$pages,$image){

@@ -22,4 +22,8 @@ class GlobalController {
         }
     }
 
+    function deleteLocalImage($img){
+        rename('image/'.$img,'imageDelete/'.$img);
+    }
+
 }

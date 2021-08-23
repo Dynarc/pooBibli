@@ -2,6 +2,10 @@
 
 define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
 
+require_once 'controllers/BookController.controller.php';
+$bookController = new BookController;
+
+
 if(empty($_GET['page'])){
 
     require_once 'views/accueil.view.php';
@@ -20,9 +24,6 @@ if(empty($_GET['page'])){
 
             case 'livres':
 
-                require_once 'controllers/BookController.controller.php';
-                $bookController = new BookController;
-
                 if(empty($url[1])){
                     $bookController->displayBooks();
                 } else{
@@ -31,7 +32,7 @@ if(empty($_GET['page'])){
                         case 'lire':
                             if(!empty($url[2])){
                                 $bookController->displayBook($url[2]);
-                            } else throw new Exception("Aucun livre n'est selectionné !");
+                            } else throw new Exception("Aucun livre n'est selectionné ");
                             break;
 
                         case 'ajouter':
@@ -46,7 +47,7 @@ if(empty($_GET['page'])){
                         case 'modifier':
                             if(!empty($url[2])){
                                 $bookController->modifyBook($url[2]);
-                            } else throw new Exception("Aucun livre n'est selectionné !");
+                            } else throw new Exception("Aucun livre n'est selectionné ");
                             break;
 
                         case 'modified':
@@ -56,7 +57,7 @@ if(empty($_GET['page'])){
                         case 'supprimer' :
                             if(!empty($url[2])){
                                 $bookController->deleteBook($url[2]);
-                            } else throw new Exception("Aucun livre n'est selectionné !");
+                            } else throw new Exception("Aucun livre n'est selectionné ");
                             break;
 
                         default:
@@ -74,7 +75,7 @@ if(empty($_GET['page'])){
         }
 
     }catch (Exception $e){
-        echo $e->getMessage();
+        $test = $e->getMessage();
+        require_once 'views/error.view.php';
     }
-    
 }

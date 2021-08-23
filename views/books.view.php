@@ -12,7 +12,7 @@
     <?php
     foreach($books as $book){
         echo '<tr>
-        <td class="align-middle"><a href="'.URL.'livres/lire/'.$book->getId().'"><img src="image/'.htmlspecialchars($book->getImage()).'" alt="couverture du livre : '.htmlspecialchars($book->getTitle()).'" width="60px;"></a></td>
+        <td class="align-middle"><a href="'.URL.'livres/lire/'.$book->getId().'"><img src="'.URL.'image/'.htmlspecialchars($book->getImage()).'" alt="couverture du livre : '.htmlspecialchars($book->getTitle()).'" width="60px;"></a></td>
         <td class="align-middle">'.$book->getTitle().'</td>
         <td class="align-middle">'.$book->getPages().'</td>
         <td class="align-middle"><a href="'.URL.'livres/modifier/'.$book->getId().'" class="btn btn-warning">Modifier</a></td>
