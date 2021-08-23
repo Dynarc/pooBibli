@@ -34,4 +34,14 @@ abstract class GlobalController {
         return $total[0]->count;
     }
 
+    static function displaySuccess(){
+        if (!empty($_SESSION['success'])){
+            echo "<div class='alert alert-dismissible alert-success'>
+            <button type='button' class='btn-close' data-bs-dismiss='alert'></button>
+            <p class='mb-0'>".$_SESSION['success']."</p>
+          </div>";
+        }
+        unset($_SESSION['success']);
+    }
+
 }

@@ -1,5 +1,7 @@
 <?php ob_start();?>
 
+<?php GlobalController::displaySuccess(); ?>
+
 <table class="table text-center">
 
     <tr class = "table-dark">
@@ -22,7 +24,7 @@
    
 </table>
 
-<a href="livres/ajouter" class="btn btn-success d-block">Ajouter</a>
+<a href="<?=URL?>livres/ajouter" class="btn btn-success d-block">Ajouter</a>
 
 <?php
 $titre = "Les livres de la bibliothèque";

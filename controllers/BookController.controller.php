@@ -1,5 +1,6 @@
 <?php
 
+
 include_once 'models/Book.php';
 include_once 'controllers/global.controller.php';
 
@@ -33,13 +34,13 @@ class BookController {
         try{
 
             if(!empty($_POST['title']) && strlen($_POST['title'])<255){
-                if(!empty($_POST['pages']) && !preg_match('/\D/',$_POST['pages'])){
+                if(!empty($_POST['pages']) && !preg_match('/\D/',$_POST['pages']) && $_POST['pages'] < 2147483648){
                     if(!empty($_FILES) && !empty($_FILES['image']['name'])){
 
                         if(GlobalController::addImage()){
                             $this->bookManager->addBookDB($_POST['title'],$_POST['pages'],$_FILES['image']['name']);
+                            $_SESSION['success'] = "L'ajout a été réussi";
                         } else throw new Exception("Erreur dans l'ajout de l'image");
-                        
                         
                         header('Location:'.URL.'livres');
                     } else throw new Exception('Veuillez mettre une image');
@@ -67,7 +68,7 @@ class BookController {
         try{
 
             if(!empty($_POST['title']) && strlen($_POST['title'])<255){
-                if(!empty($_POST['pages']) && !preg_match('/\D/',$_POST['pages'])){
+                if(!empty($_POST['pages']) && !preg_match('/\D/',$_POST['pages']) && $_POST['pages'] < 2147483648){
 
                     $book = $this->bookManager->getBookById($_POST['id']);
 
@@ -76,6 +77,7 @@ class BookController {
                         if(GlobalController::addImage()){
 
                             $this->bookManager->modifyBook($_POST['id'],$_POST['title'],$_POST['pages'],$_FILES['image']['name']);
+                            $_SESSION['success'] = "La modification a été réussie";
 
                             if($book->getImage() != $_FILES['image']['name']){
                                 GlobalController::deleteLocalImage($book->getImage());
@@ -87,6 +89,7 @@ class BookController {
                     else {
 
                         $this->bookManager->modifyBook($_POST['id'],$_POST['title'],$_POST['pages'],$book->getImage());
+                        $_SESSION['success'] = "La modification a été réussie";
                         
                     }
                 }  else throw new Exception('Veuillez mettre un nombre de page valide');
@@ -107,6 +110,7 @@ class BookController {
         $this->bookManager->deleteBook($id);
         $book = $this->bookManager->getBookById($id);
         GlobalController::deleteLocalImage($book->getImage());
+        $_SESSION['success'] = "La suppression a été réussie";
         header('Location:'.URL.'livres');
     }
 
