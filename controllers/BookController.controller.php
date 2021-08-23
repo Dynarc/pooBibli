@@ -33,25 +33,30 @@ class BookController {
 
     public function addBookValidate(){
         try{
-        if(!empty($_POST['title']) && strlen($_POST['title'])<255){
-            if(!empty($_POST['pages']) && !preg_match('/[^0-9]/',$_POST['pages'])){
-                if(!empty($_FILES) && !empty($_FILES['image']['name'])){
 
-                    if($this->globalController->addImage()){
-                        $this->bookManager->addBookDB($_POST['title'],$_POST['pages'],$_FILES['image']['name']);
-                    } else throw new Exception("Erreur dans l'ajout de l'image");
-                    
-                    
-                    header('Location:../livres');
-                } else throw new Exception('Veuillez mettre une image');
-            } else throw new Exception('Veuillez mettre un nombre de page valide');
-        } else throw new Exception('Veuillez mettre un titre valide');
+            if(!empty($_POST['title']) && strlen($_POST['title'])<255){
+                if(!empty($_POST['pages']) && !preg_match('/[^0-9]/',$_POST['pages'])){
+                    if(!empty($_FILES) && !empty($_FILES['image']['name'])){
+
+                        if($this->globalController->addImage()){
+                            $this->bookManager->addBookDB($_POST['title'],$_POST['pages'],$_FILES['image']['name']);
+                        } else throw new Exception("Erreur dans l'ajout de l'image");
+                        
+                        
+                        header('Location:../livres');
+                    } else throw new Exception('Veuillez mettre une image');
+                } else throw new Exception('Veuillez mettre un nombre de page valide');
+            } else throw new Exception('Veuillez mettre un titre valide');
+
         } catch (Exception $e) {
+
             require_once('views/addbook.view.php');
             echo '<div class="container"><div class="alert alert-dismissible alert-danger mt-5">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             <h4 class="alert-heading">Attention !</h4>
             <p class="mb-0">'.$e->getMessage().' !</p>
-          </div></div>';
+            </div></div>';
+
         }
     }
 
@@ -61,23 +66,34 @@ class BookController {
     }
 
     public function modifyBookModified(){
-        if(!empty($_POST['title']) && strlen($_POST['title'])<255){
-            if(!empty($_POST['pages']) && !preg_match('/[^0-9]/',$_POST['pages'])){
+        try{
 
-                $book = $this->bookManager->getBookById($_POST['id']);
+            if(!empty($_POST['title']) && strlen($_POST['title'])<255){
+                if(!empty($_POST['pages']) && !preg_match('/[^0-9]/',$_POST['pages'])){
 
-                if(!empty($_FILES['image']['name']) && !empty($_FILES['image']['name'])){
-                    if($this->globalController->addImage()){
-                        $this->bookManager->modifyBook($_POST['id'],$_POST['title'],$_POST['pages'],$_FILES['image']['name']);
-                        if($book->getImage() != $_FILES['image']['name'])$this->globalController->deleteLocalImage($book->getImage());
+                    $book = $this->bookManager->getBookById($_POST['id']);
+
+                    if(!empty($_FILES['image']['name']) && !empty($_FILES['image']['name'])){
+                        if($this->globalController->addImage()){
+                            $this->bookManager->modifyBook($_POST['id'],$_POST['title'],$_POST['pages'],$_FILES['image']['name']);
+                            if($book->getImage() != $_FILES['image']['name'])$this->globalController->deleteLocalImage($book->getImage());
+                        }
                     }
-                }
-                else {
-                    $this->bookManager->modifyBook($_POST['id'],$_POST['title'],$_POST['pages'],$book->getImage());
-                }
-            }  else throw new Exception('Veuillez mettre un nombre de page valide');
-        } else throw new Exception('Veuillez mettre un titre valide');
-        header('Location:'.URL.'livres');
+                    else {
+                        $this->bookManager->modifyBook($_POST['id'],$_POST['title'],$_POST['pages'],$book->getImage());
+                    }
+                }  else throw new Exception('Veuillez mettre un nombre de page valide');
+            } else throw new Exception('Veuillez mettre un titre valide');
+            header('Location:'.URL.'livres');
+
+        } catch (Exception $e){
+            $this->modifyBook($_POST['id']);
+            echo '<div class="container"><div class="alert alert-dismissible alert-danger mt-3">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <h4 class="alert-heading">Attention !</h4>
+            <p class="mb-0">'.$e->getMessage().' !</p>
+            </div></div>';
+        }
     }
 
     public function deleteBook($id){
