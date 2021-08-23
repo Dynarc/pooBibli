@@ -32,6 +32,7 @@ class BookController {
     }
 
     public function addBookValidate(){
+        try{
         if(!empty($_POST['title']) && strlen($_POST['title'])<255){
             if(!empty($_POST['pages']) && !preg_match('/[^0-9]/',$_POST['pages'])){
                 if(!empty($_FILES) && !empty($_FILES['image']['name'])){
@@ -45,6 +46,13 @@ class BookController {
                 } else throw new Exception('Veuillez mettre une image');
             } else throw new Exception('Veuillez mettre un nombre de page valide');
         } else throw new Exception('Veuillez mettre un titre valide');
+        } catch (Exception $e) {
+            require_once('views/addbook.view.php');
+            echo '<div class="container"><div class="alert alert-dismissible alert-danger mt-5">
+            <h4 class="alert-heading">Attention !</h4>
+            <p class="mb-0">'.$e->getMessage().' !</p>
+          </div></div>';
+        }
     }
 
     public function modifyBook($id){
