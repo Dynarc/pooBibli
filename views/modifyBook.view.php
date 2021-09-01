@@ -2,7 +2,7 @@
 
 <div class="container d-flex align-items-center flex-column">
 
-    <form action="<?=URL?>/livres/modified" method="post" enctype="multipart/form-data">
+    <form action="<?=URL?>livres/modified" method="post" enctype="multipart/form-data">
 
         <div class="form-group">
             <label class="form-label mt-4">Nouveau titre</label>
