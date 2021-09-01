@@ -35,8 +35,8 @@ class BookController {
 
             if(!empty($_POST['title']) && strlen($_POST['title'])<255){
                 if(!empty($_POST['pages']) && !preg_match('/\D/',$_POST['pages']) && $_POST['pages'] < 2147483648){
-                    if(!empty($_FILES) && !empty($_FILES['image']['name'])){
-
+                    if(!empty($_FILES['image']['name'])){
+                        
                         if(GlobalController::addImage()){
                             $this->bookManager->addBookDB($_POST['title'],$_POST['pages'],$_FILES['image']['name']);
                             $_SESSION['success'] = "L'ajout a été réussi";
@@ -72,7 +72,7 @@ class BookController {
 
                     $book = $this->bookManager->getBookById($_POST['id']);
 
-                    if(!empty($_FILES['image']['name']) && !empty($_FILES['image']['name'])){
+                    if(!empty($_FILES['image']['name'])){
 
                         if(GlobalController::addImage()){
 
