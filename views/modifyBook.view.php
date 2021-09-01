@@ -16,7 +16,7 @@
 
         <div class="card mt-4" style="width: 19rem;">
 
-            <img src="<?=URL?>image/<?=$book->getImage();?>" alt="Couverture du livre <?=$book->getTitle();?> ">
+            <img style="border-radius: 3px 3px 3px 3px/20px 20px 15px 2px;" src="<?=URL?>image/<?=$book->getImage();?>" alt="Couverture du livre <?=$book->getTitle();?> ">
 
         </div>
 

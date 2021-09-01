@@ -4,7 +4,7 @@
 
     <div class="card" style="width: 25rem;">
 
-        <img src="<?=URL?>image/<?=$book->getImage();?>" alt="Couverture du livre <?=$book->getTitle();?> ">
+        <img style="border-radius: 3px 3px 0px 0px/20px 15px 0px 0px;" src="<?=URL?>image/<?=$book->getImage();?>" alt="Couverture du livre <?=$book->getTitle();?> ">
         
         <div class="card-body">
             <h5 class="card-title"><?=$book->getTitle();?></h5>
