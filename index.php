@@ -75,7 +75,6 @@ if(empty($_GET['page'])){
         }
 
     }catch (Exception $e){
-        $test = $e->getMessage();
         require_once 'views/error.view.php';
     }
 }
